@@ -1,5 +1,5 @@
 {% set name = "rocm-comgr" %}
-{% set version = "2.7.0" %}
+{% set version = "3.0.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/RadeonOpenCompute/ROCm-CompilerSupport/archive/roc-{{ version }}.tar.gz
-  sha256: 80cb41cf4956168014bf26900adb84ef907ded09610b8056c87aea0d2085db29
+  sha256: c7f42508ed32c86427387b9e57b3f54a08211c335c7dd35aa084653a1b48b5ef
   patches:
     - rocm-comgr-2.6.0-unbundle-yaml-cpp.patch
     - link_to_llvm_dynamic.diff
