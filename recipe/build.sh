@@ -13,7 +13,7 @@ cmake \
   ..
 
 make VERBOSE=1 -j${CPU_COUNT}
-ctest
+ctest --output-on-failure
 make install
 
-ln -sf $PREFIX/lib/libamd_comgr.so $PREFIX/lib/libamdcomgr64.so
+# ln -sf $PREFIX/lib/libamd_comgr.so $PREFIX/lib/libamdcomgr64.so
