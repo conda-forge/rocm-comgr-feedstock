@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd lib/comgr
+cd amd/comgr
 
 mkdir build
 cd build
