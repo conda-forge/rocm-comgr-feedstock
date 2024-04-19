@@ -1,13 +1,13 @@
 {% set name = "rocm-comgr" %}
-{% set version = "6.0.2" %}
+{% set version = "6.1.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/ROCm/ROCm-CompilerSupport/archive/refs/tags/rocm-{{ version }}.tar.gz
-  sha256: 737b110d9402509db200ee413fb139a78369cf517453395b96bda52d0aa362b9
+  url: https://github.com/ROCm/llvm-project/archive/refs/tags/rocm-{{ version }}.tar.gz
+  sha256: 6bd9912441de6caf6b26d1323e1c899ecd14ff2431874a2f5883d3bc5212db34
   patches:
     - patches/5f10322be56320b185cda2ef1765e051b3c9c370.patch
     - patches/b4a5e883c7f1045c0a8257934f98915b48dea545.patch
