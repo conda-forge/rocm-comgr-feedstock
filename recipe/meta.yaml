@@ -38,7 +38,7 @@ test:
     - test -f $PREFIX/lib/libamd_comgr.so
 
 about:
-  home: https://github.com/ROCm/ROCm-CompilerSupport
+  home: https://github.com/ROCm/llvm-project/tree/amd-staging/amd/comgr
   license: NCSA
   license_file: amd/comgr/LICENSE.txt
   summary: 'ROCm Code Object Manager'
