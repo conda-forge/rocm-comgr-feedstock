@@ -41,7 +41,7 @@ test:
 about:
   home: https://github.com/ROCm/ROCm-CompilerSupport
   license: NCSA
-  license_file: LICENSE.txt
+  license_file: amd/comgr/LICENSE.txt
   summary: 'ROCm Code Object Manager'
 
 extra:
