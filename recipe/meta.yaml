@@ -1,20 +1,15 @@
 {% set name = "rocm-comgr" %}
-{% set version = "6.0.2" %}
+{% set version = "6.1.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/ROCm/ROCm-CompilerSupport/archive/refs/tags/rocm-{{ version }}.tar.gz
-  sha256: 737b110d9402509db200ee413fb139a78369cf517453395b96bda52d0aa362b9
+  url: https://github.com/ROCm/llvm-project/archive/refs/tags/rocm-{{ version }}.tar.gz
+  sha256: 6bd9912441de6caf6b26d1323e1c899ecd14ff2431874a2f5883d3bc5212db34
   patches:
-    - patches/5f10322be56320b185cda2ef1765e051b3c9c370.patch
-    - patches/b4a5e883c7f1045c0a8257934f98915b48dea545.patch
-    - patches/6e2b1bd74dc7aa8e08add392f69d37ba3071576e.patch
-    - patches/f6b2c101730025e48b1734678316ef1c42aefcb4.patch
-    - patches/8276083301409001ec7643e68f5ad58b057c21fd.patch
-    - patches/missing_include.diff
+    - patches/deactivate-flaky-tests.patch
 
 build:
   number: 0
@@ -24,7 +19,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - sysroot_linux-64 2.17  # [linux64]
+    - {{ stdlib('c') }}
     - cmake
     - make
   host:
@@ -33,6 +28,7 @@ requirements:
     - llvm
     - lld
     - zlib
+    - zstd
     - rocm-device-libs
     - rocm-cmake  {{ version }}
 
@@ -42,9 +38,9 @@ test:
     - test -f $PREFIX/lib/libamd_comgr.so
 
 about:
-  home: https://github.com/ROCm/ROCm-CompilerSupport
+  home: https://github.com/ROCm/llvm-project/tree/amd-staging/amd/comgr
   license: NCSA
-  license_file: LICENSE.txt
+  license_file: amd/comgr/LICENSE.txt
   summary: 'ROCm Code Object Manager'
 
 extra:

@@ -1,9 +1,11 @@
 #!/bin/bash
 
-cd lib/comgr
+cd amd/comgr
 
 mkdir build
 cd build
+
+export HIP_DEVICE_LIB_PATH=$PREFIX/lib/amdgcn/bitcode
 
 cmake \
   -DLLVM_DIR=$PREFIX \

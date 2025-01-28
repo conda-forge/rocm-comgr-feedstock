@@ -3,7 +3,7 @@ About rocm-comgr-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/rocm-comgr-feedstock/blob/main/LICENSE.txt)
 
-Home: https://github.com/ROCm/ROCm-CompilerSupport
+Home: https://github.com/ROCm/llvm-project/tree/amd-staging/amd/comgr
 
 Package license: NCSA
 
@@ -163,4 +163,5 @@ Feedstock Maintainers
 =====================
 
 * [@isuruf](https://github.com/isuruf/)
+* [@zklaus](https://github.com/zklaus/)
 
