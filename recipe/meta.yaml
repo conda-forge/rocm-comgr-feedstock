@@ -9,6 +9,7 @@ source:
   url: https://github.com/ROCm/llvm-project/archive/refs/tags/rocm-{{ version }}.tar.gz
   sha256: 1f52e45660ea508d3fe717a9903fe27020cee96de95a3541434838e0193a4827
   patches:
+    - patches/llvm-19-compatibility.patch
     - patches/deactivate-flaky-tests.patch
 
 build:
@@ -23,8 +24,8 @@ requirements:
     - cmake
     - make
   host:
-    - clangdev 17.*
-    - llvmdev 17.*
+    - clangdev 19.*
+    - llvmdev 19.*
     - llvm
     - lld
     - zlib
