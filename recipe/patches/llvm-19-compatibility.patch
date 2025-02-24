@@ -1,0 +1,66 @@
+diff -ruN llvm-project-rocm-6.3.2.orig/amd/comgr/src/comgr-compiler.cpp llvm-project-rocm-6.3.2/amd/comgr/src/comgr-compiler.cpp
+--- llvm-project-rocm-6.3.2.orig/amd/comgr/src/comgr-compiler.cpp	2025-01-07 19:19:35.000000000 +0100
++++ llvm-project-rocm-6.3.2/amd/comgr/src/comgr-compiler.cpp	2025-02-24 15:56:34.503793225 +0100
+@@ -384,16 +384,16 @@
+   assert(MRI && "Unable to create target register info!");
+ 
+   llvm::MCTargetOptions MCOptions;
++  MCOptions.MCSaveTempLabels = Opts.SaveTemporaryLabels;
++  MCOptions.X86RelaxRelocations = Opts.RelaxELFRelocations;
++  MCOptions.CompressDebugSections = Opts.CompressDebugSections;
++  
+   std::unique_ptr<MCAsmInfo> MAI(
+       TheTarget->createMCAsmInfo(*MRI, Opts.Triple, MCOptions));
+   assert(MAI && "Unable to create target asm info!");
+ 
+   // Ensure MCAsmInfo initialization occurs before any use, otherwise sections
+   // may be created with a combination of default and explicit settings.
+-  MAI->setCompressDebugSections(Opts.CompressDebugSections);
+-
+-  MAI->setRelaxELFRelocations(Opts.RelaxELFRelocations);
+-
+   bool IsBinary = Opts.OutputType == AssemblerInvocation::FT_Obj;
+   std::unique_ptr<raw_fd_ostream> FDOS = getOutputStream(Opts, Diags, IsBinary);
+   if (!FDOS) {
+@@ -428,9 +428,6 @@
+   }
+ 
+   MOFI->initMCObjectFileInfo(Ctx, PIC);
+-  if (Opts.SaveTemporaryLabels) {
+-    Ctx.setAllowTemporaryLabels(false);
+-  }
+   if (Opts.GenDwarfForAssembly) {
+     Ctx.setGenDwarfForAssembly(true);
+   }
+diff -ruN llvm-project-rocm-6.3.2.orig/amd/comgr/src/comgr.cpp llvm-project-rocm-6.3.2/amd/comgr/src/comgr.cpp
+--- llvm-project-rocm-6.3.2.orig/amd/comgr/src/comgr.cpp	2025-01-07 19:19:35.000000000 +0100
++++ llvm-project-rocm-6.3.2/amd/comgr/src/comgr.cpp	2025-02-24 17:13:03.097636947 +0100
+@@ -51,6 +51,7 @@
+ #include "llvm/Object/ObjectFile.h"
+ #include "llvm/Support/TargetSelect.h"
+ #include "llvm/IR/Constants.h"
++#include "llvm/IR/Module.h"
+ #include <fstream>
+ #include <mutex>
+ #include <string>
+@@ -2126,7 +2127,7 @@
+         }
+         StringRef SecName = std::move(SecNameOrError.get());
+ 
+-        if (SecName.equals(StringRef(".rodata")))
++        if (SecName == ".rodata")
+           rodataShdr = Shdr;
+       }
+     }
+diff -ruN llvm-project-rocm-6.3.2.orig/amd/comgr/src/comgr-symbol.cpp llvm-project-rocm-6.3.2/amd/comgr/src/comgr-symbol.cpp
+--- llvm-project-rocm-6.3.2.orig/amd/comgr/src/comgr-symbol.cpp	2025-01-07 19:19:35.000000000 +0100
++++ llvm-project-rocm-6.3.2/amd/comgr/src/comgr-symbol.cpp	2025-02-24 17:22:21.724227783 +0100
+@@ -146,7 +146,7 @@
+         return NULL;
+       }
+       StringRef SymName = *SymNameOrErr;
+-      if (SymName.equals(Sname)) {
++      if (SymName == Sname) {
+ #if DEBUG
+         outs() << "Found! " << sname.data() << "\n";
+ #endif
