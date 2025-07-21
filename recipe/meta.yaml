@@ -1,5 +1,5 @@
 {% set name = "rocm-comgr" %}
-{% set version = "6.3.3" %}
+{% set version = "6.4.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/ROCm/llvm-project/archive/refs/tags/rocm-{{ version }}.tar.gz
-  sha256: 4df9aba24e574edf23844c0d2d9dda112811db5c2b08c9428604a21b819eb23d
+  sha256: 9f42cb73d90bd4561686c0366f60f6e58cfd32ff24b094c69e8259fb5d177457
   patches:
     - patches/llvm-19-compatibility.patch
     - patches/deactivate-flaky-tests.patch
