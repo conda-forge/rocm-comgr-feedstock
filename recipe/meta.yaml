@@ -8,9 +8,6 @@ package:
 source:
   url: https://github.com/ROCm/llvm-project/archive/refs/tags/rocm-{{ version }}.tar.gz
   sha256: 7a484b621d568eef000ee8c4d2d46d589e5682b950f1f410ce7215031f1f3ad7
-  patches:
-    - patches/llvm-19-compatibility.patch
-    - patches/deactivate-flaky-tests.patch
 
 build:
   number: 0
