@@ -5,9 +5,8 @@ cd amd/comgr
 mkdir build
 cd build
 
-export HIP_DEVICE_LIB_PATH=$PREFIX/lib/amdgcn/bitcode
-
 cmake \
+  ${CMAKE_ARGS} \
   -DLLVM_DIR=$PREFIX \
   -DCMAKE_INSTALL_PREFIX=$PREFIX \
   -DCMAKE_BUILD_TYPE=Release \

@@ -1,5 +1,5 @@
 {% set name = "rocm-comgr" %}
-{% set version = "6.3.3" %}
+{% set version = "7.2.4" %}
 
 package:
   name: {{ name|lower }}
@@ -8,9 +8,6 @@ package:
 source:
   url: https://github.com/ROCm/llvm-project/archive/refs/tags/rocm-{{ version }}.tar.gz
   sha256: 4df9aba24e574edf23844c0d2d9dda112811db5c2b08c9428604a21b819eb23d
-  patches:
-    - patches/llvm-19-compatibility.patch
-    - patches/deactivate-flaky-tests.patch
 
 build:
   number: 0
@@ -24,14 +21,15 @@ requirements:
     - cmake
     - make
   host:
-    - clangdev 19.*
-    - llvmdev 19.*
+    - clangdev 22.*
+    - llvmdev 22.*
     - llvm
     - lld
     - zlib
     - zstd
-    - rocm-device-libs
-    - rocm-cmake  {{ version }}
+    - rocm-device-libs {{ version }}
+    - rocm-cmake {{ version }}
+    - rocm-core {{ version }}
 
 test:
   commands:
@@ -48,3 +46,4 @@ extra:
   recipe-maintainers:
     - zklaus
     - isuruf
+    - conda-forge/rocm-core
