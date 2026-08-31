@@ -9,7 +9,7 @@ source:
   url: https://github.com/ROCm/llvm-project/archive/refs/tags/rocm-{{ version }}.tar.gz
   sha256: 526b5fe23417c41acbeb2273e470887b4593f48a297a8d9c1a1aa730d556f9fb
   patches:
-    - external-llvm-22-compatibility.patch
+    - patches/external-llvm-22-compatibility.patch
 
 build:
   number: 0
